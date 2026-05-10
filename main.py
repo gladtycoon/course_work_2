@@ -7,6 +7,7 @@ file_manager = JSONFileManager()
 
 
 def filter_aircrafts(aircrafts, filter_words):
+    """Фильтруем самолеты"""
     if not filter_words:
         return aircrafts
     result = []
@@ -20,6 +21,7 @@ def filter_aircrafts(aircrafts, filter_words):
 
 
 def get_aircrafts_by_altitude(aircrafts, altitude_range):
+    """Отбираем самолеты по высоте"""
     if not altitude_range:
         return aircrafts
     try:
@@ -39,14 +41,17 @@ def get_aircrafts_by_altitude(aircrafts, altitude_range):
 
 
 def sort_aircrafts(aircrafts):
+    """Сортируем самолеты (столбец 7)"""
     return sorted(aircrafts, key=lambda x: x[7] if x[7] else 0, reverse=True)
 
 
 def get_top_aircrafts(aircrafts, top_n):
+    """Отбираем top-n самолетов (n вводится пользователем)"""
     return aircrafts[:top_n]
 
 
 def print_aircrafts(aircrafts):
+    """Выводим в консоль отобранные самолеты (исходя из ввода пользователя)"""
     if not aircrafts:
         print("Нет самолетов")
         return
@@ -60,6 +65,7 @@ def print_aircrafts(aircrafts):
 
 
 def user_interaction():
+    """Главная функция"""
     country = input("Введите страну: ")
     top_n = int(input("Топ N по высоте: "))
     filter_words = input("Фильтр по стране регистрации (через пробел): ").split()

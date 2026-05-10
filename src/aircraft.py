@@ -9,18 +9,22 @@ class Aircraft:
         self.altitude = self._validate_altitude(altitude)
 
     # ========== ВАЛИДАЦИЯ ==========
-    def _validate_icao24(self, value):
+    def _validate_icao24(self, value: str):
+        """Проверяем по коду ИКАО"""
         if not isinstance(value, str) or len(value) != 6:
             raise ValueError("ICAO24 должен быть строкой из 6 символов")
         return value.upper()
 
-    def _validate_callsign(self, value):
+    def _validate_callsign(self, value: str):
+        """Проверяем по позывному"""
         return value.strip() if value else "N/A"
 
-    def _validate_country(self, value):
+    def _validate_country(self, value: str):
+        """Проверяем по стране"""
         return value.strip() if value else "Неизвестная страна"
 
-    def _validate_velocity(self, value):
+    def _validate_velocity(self, value: int):
+        """Проверяем по скорости"""
         if value is None:
             return None
         try:
@@ -29,7 +33,8 @@ class Aircraft:
         except ValueError, TypeError:
             return None
 
-    def _validate_altitude(self, value):
+    def _validate_altitude(self, value: int):
+        """Проверяем по высоте"""
         if value is None:
             return None
         try:
@@ -41,10 +46,12 @@ class Aircraft:
     # ========== ГЕТТЕРЫ ==========
     @property
     def velocity_kmh(self):
+        """Перевод из м/с в км/ч"""
         return self.velocity * 3.6 if self.velocity else None
 
     # ========== СРАВНЕНИЕ ПО СКОРОСТИ ==========
     def __lt__(self, other):
+        """Сравнение объектов класса Aircraft по скорости (lt - меньше чем)"""
         if not isinstance(other, Aircraft):
             return NotImplemented
         if self.velocity is None and other.velocity is None:
@@ -56,6 +63,7 @@ class Aircraft:
         return self.velocity < other.velocity
 
     def __gt__(self, other):
+        """Сравнение объектов класса Aircraft по скорости (gt - больше чем)"""
         if not isinstance(other, Aircraft):
             return NotImplemented
         if self.velocity is None and other.velocity is None:
@@ -68,6 +76,7 @@ class Aircraft:
 
     # ========== СРАВНЕНИЕ ПО ВЫСОТЕ ==========
     def altitude_lt(self, other):
+        """Сравнение объектов класса Aircraft по высоте (lt - меньше чем)"""
         if not isinstance(other, Aircraft):
             return NotImplemented
         if self.altitude is None and other.altitude is None:
@@ -79,6 +88,7 @@ class Aircraft:
         return self.altitude < other.altitude
 
     def altitude_gt(self, other):
+        """Сравнение объектов класса Aircraft по высоте (gt - больше чем чем)"""
         if not isinstance(other, Aircraft):
             return NotImplemented
         if self.altitude is None and other.altitude is None:

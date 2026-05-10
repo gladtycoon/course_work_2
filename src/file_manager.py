@@ -16,11 +16,11 @@ class JSONFileManager(AbstractFileManager):
         with open(self.filename, "r", encoding="utf-8") as f:
             return json.load(f)
 
-    def _save(self, data):
+    def _save(self, data: dict):
         with open(self.filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
-    def add_aircraft(self, aircraft):
+    def add_aircraft(self, aircraft: str):
         """Добавляет самолет (словарь) в файл"""
         data = self._load()
         data.append(aircraft)
@@ -38,7 +38,7 @@ class JSONFileManager(AbstractFileManager):
                 result.append(ac)
         return result
 
-    def delete_aircraft(self, callsign):
+    def delete_aircraft(self, callsign: str):
         """Удаляет самолет по позывному"""
         data = self._load()
         data = [ac for ac in data if ac.get("callsign") != callsign]

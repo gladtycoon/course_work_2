@@ -5,7 +5,7 @@ class AbstractFileManager(ABC):
     """Абстрактный класс для работы с файлами"""
 
     @abstractmethod
-    def add_aircraft(self, aircraft):
+    def add_aircraft(self, aircraft: str):
         """Добавить самолет в файл"""
         pass
 
@@ -15,6 +15,6 @@ class AbstractFileManager(ABC):
         pass
 
     @abstractmethod
-    def delete_aircraft(self, callsign):
+    def delete_aircraft(self, callsign: str):
         """Удалить самолет по позывному"""
         pass
